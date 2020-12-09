@@ -72,7 +72,7 @@ Class `SideMenuDownSide` is container of `SideMenuContent`.
     HeaderInfo({this.image, this.name, this.subInfo});
   }
   ```
-  - You adjust the `position, size` of `Content` (our `RootScreen`, that is displayed after click menu item). 
+  - You can adjust the `position, size` of `Content` (our `RootScreen`, that is displayed after click menu item). 
   In file `side_menu_down_side.dart`
   ```
     // These functions will be called every time widget(content/screen) has to be re-rendered
@@ -95,6 +95,18 @@ Class `SideMenuDownSide` is container of `SideMenuContent`.
     return _width;
   }
   ```
+  - You can adjust the Open-Close animation speed in `side_menu_down_side.dart`:
+  ```
+   AnimatedContainer(
+                // Use the properties stored in the State class.
+                width: _getWidth(context),
+                height: _getHeight(context),
+                transform: _getTransform(context),
+                // Define how long the animation should take.
+                duration: Duration(milliseconds: 500), // <-- Here is animation time
+                // Provide an optional curve to make the animation feel smoother.
+                curve: Curves.fastOutSlowIn,
+   ```
 ## Contribution
 If you have anything to upgrade this project, feel free to contact me via email: `quytm2239@gmail.com` or skype: `tranquy239`.
 
