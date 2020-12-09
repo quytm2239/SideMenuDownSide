@@ -1,16 +1,101 @@
-# side_menu_down_side
+# SideMenuDownSide
+This project is about a Customized Flutter Drawer
 
-A new Flutter project.
+## Table of contents
+* [How it work](#how-it-work)
+* [Struture](#technologies)
+* [How to use](#how-to-use)
+* [Contribution](#contribution)
 
-## Getting Started
+## How it work
+How it work: ![alt text](SideMenuDownSideAnimate.gif?raw=true)
+	
+## Structure
+This project is created with `Dart` and `Flutter 1.25.0-4.0.pre`.
 
-This project is a starting point for a Flutter application.
+Class `SideMenuDownSide` is container of `SideMenuContent`.
+  - `SideMenuDownSide` will help us to re-layout whole screen. It is written file `side_menu_down_side.dart`
+  - `SideMenuContent` contains logic about how to display `Menu Items`. It is written in file `side_menu_content.dart`
+  - `SideMenuHolder` contains a `DataSource` for screen list (a list of Widget). It is written in file `side_menu_holder.dart`
 
-A few resources to get you started if this is your first Flutter project:
+## How to use
+  - Update your `main.dart`. Here is your new `main.dart` content:
+  ```
+  import 'package:flutter/material.dart';
+  import 'package:side_menu_down_side/navigation_center.dart';
+  import 'package:side_menu_down_side/side_menu_down_side/side_menu_down_side.dart';
+  
+  // Another your desired import ...
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+  void main() {
+    runApp(MyApp());
+  }
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  class MyApp extends StatelessWidget {
+    // This widget is the root of your application.
+    @override
+    Widget build(BuildContext context) {
+      // Update appContext for later usage
+      NavigationCenter.shared.appContext = context;
+      return MaterialApp(
+        title: 'SideMenu DownSide',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: SideMenuDownSide(), // <--- Here is our SideMenuDownSide
+      );
+    }
+  }
+  ```
+  - Take a look at class `SideMenuHolder`(a singleton) in `lib\side_menu_down_side\side_menu_holder.dart`, 
+  this class will has a list of `_MenuItem`. That stores data of each `RootScreen` in menu.
+  ```
+  List<_MenuItem> _menus = ... // This is place where we display menu items.
+  ```
+  - Here is our `_MenuItem` and `HeaderInfo` class to contain data of `SideMenuContent`
+  ```
+  class _MenuItem {
+    final String name; // Menu item's name
+    final IconData icon; // Icon of Menu item
+    final bool isHeader;
+    final Widget rootScreen; // Scren to be displayed (A Scaffold - Widget)
+
+    _MenuItem({this.name, this.icon, this.isHeader, this.rootScreen});
+  }
+
+  class HeaderInfo {
+    final IconData image;
+    final String name;
+    final String subInfo;
+
+    HeaderInfo({this.image, this.name, this.subInfo});
+  }
+  ```
+  - You adjust the `position, size` of `Content` (our `RootScreen`, that is displayed after click menu item). 
+  In file `side_menu_down_side.dart`
+  ```
+    // These functions will be called every time widget(content/screen) has to be re-rendered
+  Matrix4 _getTransform(BuildContext ctx) {
+    var width = MediaQuery.of(context).size.width; // screenWidth
+    _transform =
+        Matrix4.translationValues(width * (_isMenuOpened ? 0.4 : 0), 0.0, 0.0); // move content to the RIGHT by 40% of screen width
+    return _transform;
+  }
+
+  double _getHeight(BuildContext ctx) {
+    var height = MediaQuery.of(context).size.height;
+    _height = height * (_isMenuOpened ? 0.75 : 1); // if menu is displayed, scale down content's height (of RootScreen) to 75% of screen height (original)
+    return _height;
+  }
+
+  double _getWidth(BuildContext ctx) {
+    var width = MediaQuery.of(context).size.width;
+    _width = width * (_isMenuOpened ? 0.75 : 1); // if menu is displayed, scale down content's width (of RootScreen) to 75% of screen width (original)
+    return _width;
+  }
+  ```
+## Contribution
+If you have anything to upgrade this project, feel free to contact me via email: `quytm2239@gmail.com` or skype: `tranquy239`.
+
+Thank you!
