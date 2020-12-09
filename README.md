@@ -3,7 +3,7 @@ This project is about a Customized Flutter Drawer
 
 ## Table of contents
 * [How it work](#how-it-work)
-* [Struture](#technologies)
+* [Struture](#structure)
 * [How to use](#how-to-use)
 * [Contribution](#contribution)
 
