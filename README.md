@@ -8,7 +8,7 @@ This project is about a Customized Flutter Drawer
 * [Contribution](#contribution)
 
 ## How it work
-How it work: ![alt text](SideMenuDownSideAnimate.gif?raw=true)
+![alt text](SideMenuDownSideAnimate.gif?raw=true)
 	
 ## Structure
 This project is created with `Dart` and `Flutter 1.25.0-4.0.pre`.
