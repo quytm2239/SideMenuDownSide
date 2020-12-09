@@ -49,7 +49,7 @@ Class `SideMenuDownSide` is container of `SideMenuContent`.
   }
   ```
   - Take a look at class `SideMenuHolder`(a singleton) in `lib\side_menu_down_side\side_menu_holder.dart`, 
-  this class will has a list of `_MenuItem`. That stores data of each `RootScreen` in menu.
+  this class has a list of `_MenuItem`. That stores data of each `RootScreen` in menu.
   ```
   List<_MenuItem> _menus = ... // This is place where we display menu items.
   ```
