@@ -78,20 +78,29 @@ Class `SideMenuDownSide` is container of `SideMenuContent`.
     // These functions will be called every time widget(content/screen) has to be re-rendered
   Matrix4 _getTransform(BuildContext ctx) {
     var width = MediaQuery.of(context).size.width; // screenWidth
+    
+    // if menu is displayed, move content to the RIGHT by 40% of screen width
     _transform =
-        Matrix4.translationValues(width * (_isMenuOpened ? 0.4 : 0), 0.0, 0.0); // move content to the RIGHT by 40% of screen width
+        Matrix4.translationValues(width * (_isMenuOpened ? 0.4 : 0), 0.0, 0.0); 
+	
     return _transform;
   }
 
   double _getHeight(BuildContext ctx) {
     var height = MediaQuery.of(context).size.height;
-    _height = height * (_isMenuOpened ? 0.75 : 1); // if menu is displayed, scale down content's height (of RootScreen) to 75% of screen height (original)
+    
+    // if menu is displayed, scale down content's height (of RootScreen) to 75% of screen height (original)
+    _height = height * (_isMenuOpened ? 0.75 : 1); 
+    
     return _height;
   }
 
   double _getWidth(BuildContext ctx) {
     var width = MediaQuery.of(context).size.width;
-    _width = width * (_isMenuOpened ? 0.75 : 1); // if menu is displayed, scale down content's width (of RootScreen) to 75% of screen width (original)
+    
+    // if menu is displayed, scale down content's width (of RootScreen) to 75% of screen width (original)
+    _width = width * (_isMenuOpened ? 0.75 : 1); 
+    
     return _width;
   }
   ```
