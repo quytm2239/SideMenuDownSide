@@ -116,6 +116,87 @@ Class `SideMenuDownSide` is container of `SideMenuContent`.
                 // Provide an optional curve to make the animation feel smoother.
                 curve: Curves.fastOutSlowIn,
    ```
+   - Finally, check the example RootScreen(The screen which is opened from SideMenu, or placed in SideMenu), like below:
+```
+class RootScreen1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Update current text (a "context" of root screen) to perform a navigation like real drawer
+    NavigationCenter.shared.currentContext = context; // <- Here to keep a refer to your current "Root Screen"'s Build Context for later usage
+    return Scaffold(
+      appBar: AppBar(
+	leading:
+	    // You can make this button become a Customized Button for Appbar
+	    FlatButton(
+	  onPressed: () {
+	    SideMenuHolder.shared.onMenuButtonClickListener(); // <- You can call this function anywhere to open the SideMenu
+	  },
+	  child: Icon(
+	    Icons.menu,
+	    color: Colors.white,
+	  ),
+	),
+	title: Text('RootScreen1'),
+	titleSpacing: 0,
+      ),
+      body: Center(
+	child: FlatButton(
+	  onPressed: () {
+	    NavigationCenter.shared.navigate(SubScreen1()); // <- This is how I navigate in this project
+	  },
+	  child: Text('Screen 1'),
+	),
+      ),
+    );
+  }
+}
+```
+- And, this is how your SubScreen Appbar is:
+```
+class SubScreen1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: FlatButton(
+          onPressed: () {
+            NavigationCenter.shared.back(); // <- This how I navigate back, or pop,... in this project
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
+        title: Text('Subscreen1'),
+      ),
+      body: Center(
+        child: Text('Sub Screen 1'),
+      ),
+    );
+  }
+}
+```
+- You can also change the logic of Navigation in class NavigationCenter to has "real" push animation when navigate to new screen.
+```
+import 'package:flutter/cupertino.dart'; // for this CupertinoPageRoute
+import 'package:flutter/material.dart'; // for this MaterialPageRoute
+
+class NavigationCenter {
+  BuildContext appContext;
+  BuildContext currentContext;
+  StatefulWidget currentScreen;
+
+  void navigate(Widget newScreen, [bool fromAppContext = false]) {
+    if (currentContext == null) return;
+    Navigator.push(
+        fromAppContext ? appContext : (currentContext ?? appContext),
+        // MaterialPageRoute(builder: (context) => newScreen), // (1) - Slide Upward
+        CupertinoPageRoute(builder: (context) => newScreen)); // (2) - Push Left
+  }
+...
+}
+```
+
 ## Contribution
 If you have anything to upgrade this project, feel free to contact me via email: `quytm2239@gmail.com` or skype: `tranquy239`.
 
