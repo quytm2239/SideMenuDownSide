@@ -14,11 +14,12 @@ This project is about a Customized Flutter Drawer
 This project is created with `Dart` and `Flutter 1.25.0-4.0.pre`.
 
 Class `SideMenuDownSide` is container of `SideMenuContent`.
-  - `SideMenuDownSide` will help us to re-layout whole screen. It is written file `side_menu_down_side.dart`
+  - `SideMenuDownSide` is a skeleton, hub to combine another component together. It is written file `side_menu_down_side.dart`
   - `SideMenuContent` contains logic about how to display `Menu Items`. It is written in file `side_menu_content.dart`
   - `SideMenuHolder` contains a `DataSource` for screen list (a list of Widget). It is written in file `side_menu_holder.dart`
+  - `SideMenuScreenContainer` will help us to relayout, trigger animation, display current screen. It is written in file `side_menu_screen_container.dart`
 
-## How to use
+## How to use (Outdated, will be updated soon! But I already added comment for each important block of codes)
   - Update your `main.dart`. Here is your new `main.dart` content:
   ```
   import 'package:flutter/material.dart';
