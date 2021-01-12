@@ -11,7 +11,7 @@ class RootScreen4 extends StatelessWidget {
       appBar: AppBar(
         leading: FlatButton(
           onPressed: () {
-            SideMenuHolder.shared.onMenuButtonClickListener();
+            SideMenuHolder.shared.onOpenMenu();
           },
           child: Icon(
             Icons.menu,
@@ -36,7 +36,7 @@ class RootScreen5 extends StatelessWidget {
       appBar: AppBar(
         leading: FlatButton(
           onPressed: () {
-            SideMenuHolder.shared.onMenuButtonClickListener();
+            SideMenuHolder.shared.onOpenMenu();
           },
           child: Icon(
             Icons.menu,
@@ -61,7 +61,7 @@ class RootScreen6 extends StatelessWidget {
       appBar: AppBar(
         leading: FlatButton(
           onPressed: () {
-            SideMenuHolder.shared.onMenuButtonClickListener();
+            SideMenuHolder.shared.onOpenMenu();
           },
           child: Icon(
             Icons.menu,
@@ -86,7 +86,7 @@ class RootScreen7 extends StatelessWidget {
       appBar: AppBar(
         leading: FlatButton(
           onPressed: () {
-            SideMenuHolder.shared.onMenuButtonClickListener();
+            SideMenuHolder.shared.onOpenMenu();
           },
           child: Icon(
             Icons.menu,

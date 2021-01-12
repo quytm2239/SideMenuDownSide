@@ -4,52 +4,66 @@ import 'package:side_menu_down_side/side_menu_down_side/side_menu_holder.dart';
 
 class SideMenuContent extends StatefulWidget {
   final Function(int) onItemClicked;
+  final Function() onBackgroundClicked;
 
   const SideMenuContent({
     Key key,
     this.onItemClicked,
+    this.onBackgroundClicked,
   }) : super(key: key);
   @override
-  _SideMenuContentState createState() =>
-      _SideMenuContentState(this.onItemClicked);
+  _SideMenuContentState createState() => _SideMenuContentState(
+        onItemClicked: this.onItemClicked,
+        onBackgroundClicked: this.onBackgroundClicked,
+      );
 }
 
 class _SideMenuContentState extends State<SideMenuContent> {
   Function(int) _onItemClicked;
 
-  _SideMenuContentState(Function(int) onItemClicked) {
+  /// this will call [Sid]
+  Function() _onBackgroundClicked;
+
+  _SideMenuContentState({@required Function(int) onItemClicked, @required Function() onBackgroundClicked}) {
     /// [SideMenuHolder] holds [RootScreen]'s list and [HeaderInfo] object
     /// This listener [_onContentChanged] will help us to change content of [Header],
     /// if needed in [Runtime] by updating data of [HeaderInfo] object
     SideMenuHolder.shared.onContentChanged = _onContentChanged;
 
-    /// [onItemClicked] is a listener of [SideMenuDownSide], tell it to re-layout (open the SideMenu)
+    /// [onItemClicked] is a listener of [SideMenuDownSide], tell it to notify
+    /// [SideMenuHolder] to move to new root screen
     this._onItemClicked = onItemClicked;
+
+    /// [onBackgroundClicked] is a listener of [SideMenuDownSide], tell it to notify
+    /// [SideMenuScreenContainer] to refreshScreen() -> hide [SideMenuContent]
+    this._onBackgroundClicked = onBackgroundClicked;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // This is side menu item list
-      child: ListView.builder(
-          primary:
-              false, // disable scrolling, but if [RootScreen] is long, we should enable
-          padding: EdgeInsets.zero,
-          itemCount: SideMenuHolder.shared.menus().length + 1, // + 1 for header
-          itemBuilder: (_, index) {
-            if (index == 0) {
-              // Header part
-              return _makeHeader(SideMenuHolder.shared.getHeaderInfo());
-            }
-            // Item part
-            var validIndex = index - 1;
-            return GestureDetector(
-              onTap: () {
-                _onItemClicked(validIndex);
-              },
-              child: _makeMenuItem(validIndex),
-            );
-          }),
+    return GestureDetector(
+      child: Container(
+        // This is side menu item list
+        child: ListView.builder(
+            primary: false, // disable scrolling, but if [RootScreen] is long, we should enable
+            padding: EdgeInsets.zero,
+            itemCount: SideMenuHolder.shared.menus().length + 1, // + 1 for header
+            itemBuilder: (_, index) {
+              if (index == 0) {
+                // Header part
+                return _makeHeader(SideMenuHolder.shared.getHeaderInfo());
+              }
+              // Item part
+              var validIndex = index - 1;
+              return GestureDetector(
+                onTap: () {
+                  _onItemClicked(validIndex);
+                },
+                child: _makeMenuItem(validIndex),
+              );
+            }),
+      ),
+      onTap: _onBackgroundClicked,
     );
   }
 
@@ -80,10 +94,7 @@ class _SideMenuContentState extends State<SideMenuContent> {
                   softWrap: true,
                   maxLines: 2,
                   textAlign: TextAlign.left,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -92,8 +103,7 @@ class _SideMenuContentState extends State<SideMenuContent> {
                     softWrap: true,
                     maxLines: 2,
                     textAlign: TextAlign.left,
-                    style: const TextStyle(
-                        color: const Color(0xFFE0E0E0), fontSize: 13),
+                    style: const TextStyle(color: const Color(0xFFE0E0E0), fontSize: 13),
                   ),
                 ),
               ],

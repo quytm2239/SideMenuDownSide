@@ -13,7 +13,7 @@ class RootScreen1 extends StatelessWidget {
             // You can make this button become a Customized Button for Appbar
             FlatButton(
           onPressed: () {
-            SideMenuHolder.shared.onMenuButtonClickListener();
+            SideMenuHolder.shared.onOpenMenu();
           },
           child: Icon(
             Icons.menu,

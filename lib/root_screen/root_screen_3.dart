@@ -11,7 +11,7 @@ class RootScreen3 extends StatelessWidget {
       appBar: AppBar(
         leading: FlatButton(
           onPressed: () {
-            SideMenuHolder.shared.onMenuButtonClickListener();
+            SideMenuHolder.shared.onOpenMenu();
           },
           child: Icon(
             Icons.menu,
