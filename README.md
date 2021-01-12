@@ -19,7 +19,9 @@ Class `SideMenuDownSide` is container of `SideMenuContent`.
   - `SideMenuHolder` contains a `DataSource` for screen list (a list of Widget). It is written in file `side_menu_holder.dart`
   - `SideMenuScreenContainer` will help us to relayout, trigger animation, display current screen. It is written in file `side_menu_screen_container.dart`
 
-## How to use (Outdated, will be updated soon! But I already added comment for each important block of codes)
+## How to use 
+⚠️⚠️⚠️ Outdated, will be updated soon! But I already added comment for each important block of codes.
+
   - Update your `main.dart`. Here is your new `main.dart` content:
   ```
   import 'package:flutter/material.dart';
